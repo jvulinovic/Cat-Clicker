@@ -15,10 +15,24 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 .click-counter {
     font-family: 'Courier', sans-serif;
     font-size: 2em;
+    text-align: center;
+}
+
+.cats {
+    margin: 10px;
+}
+
+h1 {
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+  color: blue;
 }
