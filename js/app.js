@@ -34,6 +34,35 @@ function catCounterTwo () {
   }, false);
 };
 
-catCounterOne();
-catCounterTwo();
-catNames();
+// catCounterOne();
+// catCounterTwo();
+// catNames();
+
+
+let catnames = ["Fred", "Harry", "Jim", "Josie", "Fatso"];
+
+let catimages = ["catone.jpg", "cattwo.jpg", "catthree.jpg", "catfour.jpg", "catfive.jpg"];
+
+let container = document.getElementById('catList');
+
+let cattitle = document.getElementById('cattitle');
+
+let catimage = document.getElementById('catimage');
+
+function createList () {
+  for (const [index, value] of catnames.entries()) {
+    var elem = document.createElement('div');
+    elem.textContent = value;
+    elem.className = "catlistitem";
+    elem.addEventListener('click', (function(numCopy) {
+        return function() {
+            cattitle.innerHTML = numCopy;
+            catimage.src = "img/" + catimages[index];
+          };
+        })(value));
+        container.appendChild(elem);
+      };
+};
+
+
+createList ();

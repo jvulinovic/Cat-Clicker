@@ -24,8 +24,16 @@ body {
     text-align: center;
 }
 
-.cats {
-    margin: 10px;
+.catlistitem {
+    margin: 20px;
+    padding: 10px;
+    border: solid 5px blue;
+}
+
+.displaycat {
+    margin: 20px;
+    padding: 20px;
+    border: solid 5px darkblue;
 }
 
 h1 {
@@ -34,5 +42,5 @@ h1 {
 
 h2 {
   text-align: center;
-  color: blue;
+  color: darkblue;
 }
