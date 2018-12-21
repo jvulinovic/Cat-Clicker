@@ -18,6 +18,16 @@ body {
     flex-direction: row;
 }
 
+.catupdate, .catupdateinput{
+    display: flex;
+    align-items:  baseline;
+    flex-direction: column;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
 .click-counter {
     font-family: 'Courier', sans-serif;
     font-size: 2em;

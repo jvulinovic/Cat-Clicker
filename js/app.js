@@ -39,6 +39,7 @@ var octopus = {
         // tell our views to initialize
         catListView.init();
         catView.init();
+        adminView.init();
     },
 
     getCurrentCat: function() {
@@ -58,6 +59,14 @@ var octopus = {
     incrementCounter: function() {
         model.currentCat.clickCount++;
         catView.render();
+    },
+
+    showAdmin: function () {
+      inputscreen.classList.toggle('hidden');
+    },
+
+    hideAdmin: function () {
+      inputscreen.classList.toggle('hidden');
     }
 };
 
@@ -91,6 +100,21 @@ var catView = {
 
 };
 
+var adminView = {
+
+    init: function () {
+      adminbutton = document.getElementById('adminbutton');
+      cancelbutton = document.getElementById('cancelbutton');
+      inputscreen = document.getElementById('inputscreen');
+      adminbutton.addEventListener('click', function () {
+        octopus.showAdmin();
+      });
+      cancelbutton.addEventListener('click', function () {
+        octopus.hideAdmin();
+      });
+    }
+}
+
 
 var catListView = {
 
@@ -103,8 +127,7 @@ var catListView = {
     },
 
     render: function () {
-        var cats = octopus.getCats();
-        cats.forEach (function(cats) {
+        model.cats.forEach (function(cats) {
           var elem = document.createElement('div');
           elem.textContent = cats.name;
           elem.className = "catlistitem";
