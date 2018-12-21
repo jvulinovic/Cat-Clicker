@@ -67,7 +67,14 @@ var octopus = {
 
     hideAdmin: function () {
       inputscreen.classList.toggle('hidden');
-    }
+    },
+
+    saveAdmin: function () {
+      adminView.save();
+      catListView.render();
+      this.hideAdmin();
+      catView.render();
+    },
 };
 
 
@@ -95,6 +102,7 @@ var catView = {
       this.clickCounter.textContent = "No. of clicks = " + currentCat.clickCount;
       this.cattitle.textContent = currentCat.name;
       this.catimage.src = currentCat.URL;
+      adminView.render();
 
     }
 
@@ -104,6 +112,7 @@ var adminView = {
 
     init: function () {
       adminbutton = document.getElementById('adminbutton');
+      savebutton = document.getElementById('savebutton');
       cancelbutton = document.getElementById('cancelbutton');
       inputscreen = document.getElementById('inputscreen');
       adminbutton.addEventListener('click', function () {
@@ -112,6 +121,31 @@ var adminView = {
       cancelbutton.addEventListener('click', function () {
         octopus.hideAdmin();
       });
+
+      savebutton.addEventListener('click', function () {
+        octopus.saveAdmin();
+      });
+
+      this.render();
+    },
+
+    render: function () {
+
+      var currentCat = octopus.getCurrentCat();
+      inputcatname = document.getElementById('name');
+      inputcatclick = document.getElementById('number');
+      inputcatURL = document.getElementById('URL');
+      inputcatname.value = currentCat.name;
+      inputcatclick.value = currentCat.clickCount;
+      inputcatURL.value = currentCat.URL;
+    },
+
+    save: function () {
+
+      var currentCat = octopus.getCurrentCat();
+      currentCat.name = document.getElementById('name').value
+      currentCat.URL = document.getElementById('URL').value
+      currentCat.clickCount = document.getElementById('number').value
     }
 }
 
@@ -120,13 +154,14 @@ var catListView = {
 
   init: function() {
         // store the DOM element for easy access later
-        this.catListElem = document.getElementById('catlist');
+        this.catListElem = document.getElementById('catList');
 
         // render this view (update the DOM elements with the right values)
         this.render();
     },
 
     render: function () {
+        this.catListElem.innerHTML = '';
         model.cats.forEach (function(cats) {
           var elem = document.createElement('div');
           elem.textContent = cats.name;
