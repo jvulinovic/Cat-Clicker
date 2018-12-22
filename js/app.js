@@ -33,10 +33,10 @@ var model = {
 var octopus = {
 
     init: function() {
-        // set our current cat to the first one in the list
+        // set the current cat to the first one in the list
         model.currentCat = model.cats[0];
 
-        // tell our views to initialize
+        // tell the views to initialize
         catListView.init();
         catView.init();
         adminView.init();
@@ -61,32 +61,25 @@ var octopus = {
         catView.render();
     },
 
-    showAdmin: function () {
-      inputscreen.classList.toggle('hidden');
-    },
-
-    hideAdmin: function () {
-      inputscreen.classList.toggle('hidden');
+    toggleAdmin: function () {
+      inputScreen.classList.toggle('hidden');
     },
 
     saveAdmin: function () {
       adminView.save();
       catListView.render();
-      this.hideAdmin();
+      this.toggleAdmin();
       catView.render();
     },
 };
 
 
-
-
 var catView = {
 
     init: function () {
-      this.cattitle = document.getElementById('cattitle');
-      this.catimage = document.getElementById('catimage');
-      this.catList = document.getElementById('catList');
-      this.clickCounter = document.getElementById('clickCounter');
+      this.cattitle = document.getElementById('cat-title');
+      this.catimage = document.getElementById('cat-image');
+      this.clickCounter = document.getElementById('click-counter');
 
       this.catimage.addEventListener('click', function () {
         octopus.incrementCounter();
@@ -111,18 +104,20 @@ var catView = {
 var adminView = {
 
     init: function () {
-      adminbutton = document.getElementById('adminbutton');
-      savebutton = document.getElementById('savebutton');
-      cancelbutton = document.getElementById('cancelbutton');
-      inputscreen = document.getElementById('inputscreen');
-      adminbutton.addEventListener('click', function () {
-        octopus.showAdmin();
-      });
-      cancelbutton.addEventListener('click', function () {
-        octopus.hideAdmin();
+      adminButton = document.getElementById('admin-button');
+      saveButton = document.getElementById('save-button');
+      cancelButton = document.getElementById('cancel-button');
+      inputScreen = document.getElementById('input-screen');
+
+      adminButton.addEventListener('click', function () {
+        octopus.toggleAdmin();
       });
 
-      savebutton.addEventListener('click', function () {
+      cancelButton.addEventListener('click', function () {
+        octopus.toggleAdmin();
+      });
+
+      saveButton.addEventListener('click', function () {
         octopus.saveAdmin();
       });
 
@@ -132,12 +127,12 @@ var adminView = {
     render: function () {
 
       var currentCat = octopus.getCurrentCat();
-      inputcatname = document.getElementById('name');
-      inputcatclick = document.getElementById('number');
-      inputcatURL = document.getElementById('URL');
-      inputcatname.value = currentCat.name;
-      inputcatclick.value = currentCat.clickCount;
-      inputcatURL.value = currentCat.URL;
+      inputCatName = document.getElementById('name');
+      inputCatClick = document.getElementById('number');
+      inputCatURL = document.getElementById('URL');
+      inputCatName.value = currentCat.name;
+      inputCatClick.value = currentCat.clickCount;
+      inputCatURL.value = currentCat.URL;
     },
 
     save: function () {
@@ -154,27 +149,27 @@ var catListView = {
 
   init: function() {
         // store the DOM element for easy access later
-        this.catListElem = document.getElementById('catList');
+        catListElem = document.getElementById('catlist');
 
         // render this view (update the DOM elements with the right values)
         this.render();
     },
 
     render: function () {
-        this.catListElem.innerHTML = '';
-        model.cats.forEach (function(cats) {
-          var elem = document.createElement('div');
-          elem.textContent = cats.name;
-          elem.className = "catlistitem";
-          elem.addEventListener('click', (function(selectedCat) {
-              return function () {
-                octopus.setCurrentCat(selectedCat);
-                catView.render();
-              };
-            })(cats));
-          catList.appendChild(elem);
-    });
-  }
+      catListElem.innerHTML = '';
+      model.cats.forEach (function(cats) {
+        var elem = document.createElement('div');
+        elem.textContent = cats.name;
+        elem.className = "cat-list-item";
+        elem.addEventListener('click', (function(selectedCat) {
+            return function () {
+              octopus.setCurrentCat(selectedCat);
+              catView.render();
+            };
+          })(cats));
+        catlist.appendChild(elem);
+  });
+}
 }
 
 

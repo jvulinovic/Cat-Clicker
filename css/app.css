@@ -18,7 +18,7 @@ body {
     flex-direction: row;
 }
 
-.catupdate, .catupdateinput{
+.cat-update, .cat-update-input{
     display: flex;
     align-items:  baseline;
     flex-direction: column;
@@ -34,13 +34,13 @@ body {
     text-align: center;
 }
 
-.catlistitem {
+.cat-list-item {
     margin: 20px;
     padding: 10px;
     border: solid 5px blue;
 }
 
-.displaycat {
+.display-cat {
     margin: 20px;
     padding: 20px;
     border: solid 5px darkblue;
